@@ -20,7 +20,8 @@ jobs:
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
       - name: push output branch
         run: |
-          cd dist
+          mkdir out && cp dist/*.svg out/
+          cd out
           git init -q -b output
           git config user.name tokenbleed
           git config user.email 315635660+tokenbleed@users.noreply.github.com
