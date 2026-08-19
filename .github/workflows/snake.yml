@@ -16,8 +16,8 @@ jobs:
         with:
           github_user_name: tokenbleed
           outputs: |
-            dist/github-contribution-grid-snake.svg
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+            dist/github-contribution-grid-snake.svg?color_snake=%23e8590c
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=%23ffa94d
       - name: push output branch
         run: |
           mkdir out && cp dist/*.svg out/
