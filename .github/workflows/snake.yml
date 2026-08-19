@@ -1,0 +1,29 @@
+name: snake
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  snake:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: generate
+        uses: Platane/snk@v3
+        with:
+          github_user_name: tokenbleed
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+      - name: push output branch
+        run: |
+          cd dist
+          git init -q -b output
+          git config user.name tokenbleed
+          git config user.email 315635660+tokenbleed@users.noreply.github.com
+          git add -A
+          git commit -qm "chore: regenerate snake"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/tokenbleed/tokenbleed.git" output
